@@ -28,7 +28,7 @@ impl ResendMailer {
 
     pub fn load_templates(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         Arc::get_mut(&mut self.templates)
-            .ok_or_else(|| "Failed to get mutable reference to templates".into())?
+            .ok_or_else(|| Box::<dyn std::error::Error>::from("Failed to get mutable reference to templates"))?
             .register_templates_directory("assets_email/templates", Default::default())?;
         Ok(())
     }
